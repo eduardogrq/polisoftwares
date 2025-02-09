@@ -59,7 +59,7 @@ const WebsitesPage = () => {
                                 No results found
                             </div>
                         )}
-                        <div className="absolute top-[40px] left-0 w-[306px] min-h-[48px] py-[8px] bg-white text-[#BEBFC2] text-xs rounded-md shadow-lg flex flex-col justify-center items-center">
+                        <div className="absolute top-[40px] left-0 w-[306px] min-h-[48px] py-[8px] bg-white text-[#BEBFC2] text-xs rounded-[8px] shadow-lg flex flex-col justify-center items-center">
                             {/* Items rendered */}
                             <div className="flex items-center w-full h-[48px] hover:bg-[#F2F9FF] py-[10px] px-[20px] gap-[8px] cursor-pointer">
                                 <div className="w-[28px] h-[28px] bg-blue-200">
