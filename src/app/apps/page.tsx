@@ -5,10 +5,17 @@ import { useEffect, useState, useCallback } from "react";
 import SearchInput from "./components/SearchInput";
 import SearchIcon from "./../icons/SearchIcon";
 
+interface AppData {
+    domains: string[];
+    icon: string;
+    id: string;
+    name: string;
+}
+
 const AppsPage = () => {
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
-    const [appsData, setAppsData] = useState<any[]>([]);
+    const [appsData, setAppsData] = useState<AppData[]>([]);
     const [optionsOpen, setOptionsOpen] = useState(true);
 
     const getAppsData = useCallback(async () => {
@@ -19,7 +26,8 @@ const AppsPage = () => {
 
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:3001/websites/search?name=${search}`);
+            const response = await axios.get<AppData[]>(`http://localhost:3001/websites/search?name=${search}`);
+            console.log("Data fetched:", response.data);
             setAppsData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
