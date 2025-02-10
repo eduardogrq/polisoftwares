@@ -46,7 +46,7 @@ const SearchInput = ({ search, setSearch, appsData, loading, optionsOpen, setOpt
             {search && optionsOpen && (
                 <div
                     className={`absolute top-[40px] left-0 w-[306px] min-h-[48px] max-h-[250px] overflow-y-auto bg-white text-xs rounded-md shadow-lg flex flex-col items-center
-                    ${appsData.length === 0 ? "justify-center" : ""}`}
+                    ${appsData.length === 0 || loading ? "justify-center" : ""}`}
                 >
                     {loading ? (
                         <LoadingDots />

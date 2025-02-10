@@ -26,7 +26,7 @@ const AppsPage = () => {
 
         try {
             setLoading(true);
-            const response = await axios.get<AppData[]>(`http://localhost:3001/websites/search?name=${search}`);
+            const response = await axios.get<AppData[]>(`http://localhost:3001/api/v1/applications/search?name=${search}`);
             setAppsData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -37,7 +37,13 @@ const AppsPage = () => {
     }, [search]);
 
     useEffect(() => {
-        getAppsData();
+        setLoading(true);
+
+        const delayDebounce = setTimeout(() => {
+            getAppsData();
+        }, 500);
+
+        return () => clearTimeout(delayDebounce);
     }, [search, getAppsData]);
 
     return (
