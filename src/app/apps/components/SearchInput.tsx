@@ -2,10 +2,17 @@ import { useState } from "react";
 import AppItem from "./AppItem";
 import LoadingDots from "./LoadingDots";
 
+interface AppData {
+    domains: string[];
+    icon: string;
+    id: string;
+    name: string;
+}
+
 interface SearchInputProps {
     search: string;
     setSearch: (value: string) => void;
-    appsData: any[];
+    appsData: AppData[];
     loading: boolean;
     optionsOpen: boolean;
     setOptionsOpen: (value: boolean) => void;

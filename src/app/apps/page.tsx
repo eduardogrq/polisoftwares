@@ -27,7 +27,6 @@ const AppsPage = () => {
         try {
             setLoading(true);
             const response = await axios.get<AppData[]>(`http://localhost:3001/websites/search?name=${search}`);
-            console.log("Data fetched:", response.data);
             setAppsData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
