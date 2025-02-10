@@ -30,7 +30,7 @@ const AppItem = ({ app, onSelect }: { app: any, onSelect: (name: string) => void
     };
     return (
         <div className="flex items-center w-full h-[48px] hover:bg-[#F2F9FF] py-[10px] px-[20px] gap-[8px] cursor-pointer" onClick={handleClick}>
-            <img src={`/icons/${app.icon}`} alt={app.name} className="w-[28px] h-[28px]" />
+            <img src={`/icons/${app.icon}`} alt={app.name} className="w-[28px] h-[28px] bg-gray-200" />
             <div className="flex flex-col justify-center">
                 <span className="text-sm font-bold leading-none text-[#424243]">{app.name}</span>
                 <span className="text-xs leading-none text-[#757678]">{app.domains.length > 0 ? extractDomain(app.domains[0]) : 'Domain not available'}</span>
@@ -100,7 +100,7 @@ const AppsPage = () => {
 
                         {/* results container or loading */}
                         {search && optionsOpen && (
-                            <div className="absolute top-[40px] left-0 w-[306px] min-h-[48px] max-h-[250px] overflow-y-auto bg-white text-xs rounded-md shadow-lg flex flex-col justify-center items-center ">
+                            <div className="absolute top-[40px] left-0 w-[306px] min-h-[48px] max-h-[250px] overflow-y-auto bg-white text-xs rounded-md shadow-lg flex flex-col items-center">
                                 {loading ? (
                                     <LoadingDots />
                                 ) : appsData.length > 0 ? (
