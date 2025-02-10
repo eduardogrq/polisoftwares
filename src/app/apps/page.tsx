@@ -20,7 +20,7 @@ const LoadingDots = () => (
 const AppItem = ({ app, onSelect }: { app: any, onSelect: (name: string) => void }) => {
 
     function extractDomain(url: string) {
-        if (!url || typeof url !== "string") return ""; // Evita errores si url es undefined o no es string
+        if (!url || typeof url !== "string") return "";
         const match = url.match(/^https?:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
         return match ? match[1].replace(/^www\./, "") : url;
     }
@@ -33,20 +33,25 @@ const AppItem = ({ app, onSelect }: { app: any, onSelect: (name: string) => void
             <img src={`/icons/${app.icon}`} alt={app.name} className="w-[28px] h-[28px]" />
             <div className="flex flex-col justify-center">
                 <span className="text-sm font-bold leading-none text-[#424243]">{app.name}</span>
-                <span className="text-xs leading-none text-[#757678]">{extractDomain(app.domains[0])}</span>
+                <span className="text-xs leading-none text-[#757678]">{app.domains.length > 0 ? extractDomain(app.domains[0]) : 'Domain not available'}</span>
             </div>
         </div>
     )
 };
 
-const WebsitesPage = () => {
+const AppsPage = () => {
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
     const [appsData, setAppsData] = useState<any[]>([]);
+    const [optionsOpen, setOptionsOpen] = useState(true);
+    const [hasSelected, setHasSelected] = useState(false);
 
     const handleSelectApp = useCallback((name: string) => {
         setSearch(name);
+        setOptionsOpen(false);
+        setHasSelected(true);
     }, []);
+
 
     const getAppsData = useCallback(async () => {
         if (!search.trim()) {
@@ -67,6 +72,10 @@ const WebsitesPage = () => {
     }, [search]);
 
     useEffect(() => {
+        if (!hasSelected) {
+            setOptionsOpen(true);
+        }
+        setHasSelected(false);
         getAppsData();
     }, [search, getAppsData]);
 
@@ -90,7 +99,7 @@ const WebsitesPage = () => {
                         />
 
                         {/* results container or loading */}
-                        {search && (
+                        {search && optionsOpen && (
                             <div className="absolute top-[40px] left-0 w-[306px] min-h-[48px] max-h-[250px] overflow-y-auto bg-white text-xs rounded-md shadow-lg flex flex-col justify-center items-center ">
                                 {loading ? (
                                     <LoadingDots />
@@ -109,4 +118,4 @@ const WebsitesPage = () => {
     );
 };
 
-export default WebsitesPage;
+export default AppsPage;
